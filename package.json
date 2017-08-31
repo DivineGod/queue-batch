@@ -1,0 +1,14 @@
+{
+  "name": "queue-batch",
+  "version": "1.0.0",
+  "description": "Basic batch processing queue library",
+  "main": "index.js",
+  "author": "Anders Rasmussen <divinegod@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "node tests/index.js"
+  },
+  "devDependencies": {
+    "tape": "^4.8.0"
+  }
+}
