@@ -136,3 +136,43 @@ test('Concurrency 2', (t) => {
 
     t.equal(processor.concurrency, 2, 'correct concurrency');
 });
+
+test('handle error from concurrent function', (t) => {
+    t.plan(11);
+
+    var testItem = 'hello, world';
+    var testArray = [testItem, 1, testItem];
+    var testError = 'error';
+
+    var testDateLower = new Date();
+    var testDateUpper = new Date(testDateLower);
+    var timeoutValue = 100.0
+
+    var testCallback = (item, cb) => {
+        if (item === 1) {
+            t.equal(item, 1, 'Correct item');
+            return setTimeout(() => cb(testError), timeoutValue);
+        }
+        t.equal(item, testItem, 'Correct item');
+        setTimeout(cb, timeoutValue);
+    };
+
+    var secondsEpsilon = 50.0;
+    var processor = new Processor(testCallback, 2);
+    processor.on('empty', () => {
+        var now = new Date();
+        testDateLower.setMilliseconds(testDateLower.getMilliseconds() + 3*timeoutValue);
+        testDateUpper.setMilliseconds(testDateUpper.getMilliseconds() + 3*timeoutValue + secondsEpsilon);
+        t.ok(now.getTime() >= testDateLower.getTime());
+        t.ok(now.getTime() <= testDateUpper.getTime());
+        t.end();
+    });
+    processor.on('error', (error) => {
+        t.equal(error, testError, 'correct error');
+    });
+
+    processor.concat(testArray);
+    processor.concat(testArray);
+
+    t.equal(processor.concurrency, 2, 'correct concurrency');
+});
