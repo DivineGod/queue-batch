@@ -1,6 +1,6 @@
 {
   "name": "queue-batch",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Basic batch processing queue library",
   "main": "index.js",
   "author": "Anders Rasmussen <divinegod@gmail.com>",
