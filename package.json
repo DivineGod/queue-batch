@@ -10,5 +10,16 @@
   },
   "devDependencies": {
     "tape": "^4.8.0"
-  }
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DivineGod/queue-batch.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DivineGod/queue-batch/issues"
+  },
+  "homepage": "https://github.com/DivineGod/queue-batch#readme"
 }
