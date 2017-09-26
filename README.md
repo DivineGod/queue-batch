@@ -5,7 +5,7 @@ A minimalistic queue processor which emits events.
 # Example
 
 ```javascript
-var Processor = require('batch-queue');
+var Processor = require('queue-batch');
 
 var longRunningFunction = (item, next) => {
     console.log('got a new item to process');
